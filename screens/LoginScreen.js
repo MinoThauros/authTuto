@@ -19,8 +19,12 @@ const LoginScreen=()=>{
     catch (error){
       console.log(error)//hook on error here
       Alert.alert('Authentication Failed', 'Could not log in you. Please check your credentials or try again later')
+      setIsAuthenticating(false)
     }
-    setIsAuthenticating(false)
+    //setIsAuthenticating(false)
+    //state update is done for something that is unmounting
+    //causes a memory leak
+
     
 
 

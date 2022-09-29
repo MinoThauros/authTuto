@@ -4,7 +4,7 @@ export const AuthContext=createContext({
     token:'',
     isAuthenticated:false,
     authenticate:()=>{},
-    logoout:()=>{}
+    logout:()=>{}
 });
 
 const AuthContextProvider=({children})=>{
