@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const AuthContext=createContext({
     token:'',
@@ -9,9 +10,22 @@ export const AuthContext=createContext({
 
 const AuthContextProvider=({children})=>{
     const [authToken,setAuthToken]=useState();
+    useEffect(()=>{
+        AsyncStorage.getItem('token')
+        .then((token)=>{
+            if (token){
+                setAuthToken(token)
+            }
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+    },[]);//as per roo structure, component will be initialized at the begining
 
     const authenticate=(token)=>{
         setAuthToken(token)
+        AsyncStorage.setItem('token',token)
+        ;
     };
 
     const logout=()=>{
